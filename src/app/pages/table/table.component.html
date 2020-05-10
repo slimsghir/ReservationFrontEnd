@@ -1,0 +1,67 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Liste des employés</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th>
+                Nom
+              </th>
+              <th>
+                Prénom
+              </th>
+              <th>
+                Login
+              </th>
+              <th>
+                Téléphone
+              </th>
+              <th>
+                Superviseur
+              </th>
+              <th class="text-right">
+                Action
+              </th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let employe of employes">
+                <td>
+                  {{employe.nom}}
+                </td>
+                <td>
+                  {{employe.prenom}}
+                </td>
+                <td>
+                  {{employe.login}}
+                </td>
+                <td>
+                  {{employe.phone}}
+                </td>
+                <td>
+                  <select  class="browser-default custom-select" (change)="onEditSuperviseur($event.target.value,employe)">
+                    <option *ngIf="employe.superviseur == null" selected disabled>Aucun superviseur</option>
+                    <option *ngIf="employe.superviseur != null" selected disabled>{{employe.superviseur.prenom}} {{employe.superviseur.nom}}</option>
+                    <option value="setnull" *ngIf="employe.superviseur != null">Aucun superviseur</option>
+                    <ng-container *ngFor="let emp of employes">
+                        <option value={{emp.id}} *ngIf="employe.superviseur != null && emp.id != employe.id && employe.superviseur.id != emp.id" >{{emp.prenom}} {{emp.nom}}</option>
+                        <option value={{emp.id}} *ngIf="employe.superviseur == null && emp.id != employe.id">{{emp.prenom}} {{emp.nom}}</option>
+                    </ng-container>
+                  </select> 
+                </td>
+                <td class="text-right">
+                  <button (click)="deleteEmploye(employe)" class="btn btn-icon btn-round btn-danger">
+                    <i class="nc-icon nc-simple-remove"></i>
+                </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

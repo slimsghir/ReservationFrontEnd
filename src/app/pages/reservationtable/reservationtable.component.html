@@ -1,0 +1,76 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Liste des réservations</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th>
+                Lieu départ
+              </th>
+              <th>
+                Lieu destination
+              </th>
+              <th>
+                Date de réservation
+              </th>
+              <th>
+                Statut
+              </th>
+              <th>
+                Employés en charge
+              </th>
+              <th class="text-right">
+                Action
+              </th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let res of reservations">
+                <td>
+                  {{res.lieuDepart}}
+                </td>
+                <td>
+                  {{res.lieuDestination}}
+                </td>
+                <td>
+                  {{res.dateReservation | date:'dd-MM-yyyy'}}
+                </td> 
+                <td>
+                  <ng-container>{{getEtat(res.etat)}}</ng-container>
+                </td>
+                <td>
+                  <button  (click)="open(classic, '', '')" type="button" class="btn btn-sm btn-default">Afficher la liste</button>
+                </td>
+                <ng-template #classic let-c="close" let-d="dismiss">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h6 class="modal-title" id="modal-title-default">Employés en charge</h6>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
+                        <span aria-hidden="true">×</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p>Les employés en charge de cette réservation sont : {{getEmployesEnCharge(res)}}</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-primary" (click)="c('Close click')">J'ai compris</button>
+                      <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" (click)="c('Close click')">Fermer</button>
+                    </div>
+                  </div>
+                </ng-template>
+                <td class="text-right">
+                  <button (click)="deleteReservation(res)" class="btn btn-icon btn-round btn-danger">
+                    <i class="nc-icon nc-simple-remove"></i>
+                </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

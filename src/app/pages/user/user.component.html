@@ -1,0 +1,89 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <h5 class="card-title">Nouvel employé</h5>
+      </div>
+      <div class="card-body">
+        <form name="form" #f="ngForm" (submit)="f.form.valid && inscrire()" novalidate>
+          <div class="row">
+            <div class="col-md-4 pr-1">
+              <div class="form-group">
+                <label>Nom</label>
+                <input type="text" 
+                      class="form-control"
+                      placeholder="Nom"
+                      [(ngModel)]="model.nom"
+                      name="nom"
+                      #nom="ngModel"
+                      [ngClass]="{ 'is-invalid' : f.submitted && nom.invalid }"
+                      required>
+              </div>
+            </div>
+            <div class="col-md-4 px-1">
+              <div class="form-group">
+                <label>Prénom</label>
+                <input type="text" 
+                      class="form-control" 
+                      placeholder="Prénom"
+                      [(ngModel)]="model.prenom"
+                      name="prenom"
+                      #prenom="ngModel"
+                      [ngClass]="{ 'is-invalid' : f.submitted && prenom.invalid }"
+                      required>
+              </div>
+            </div>
+            <div class="col-md-4 pl-1">
+              <div class="form-group">
+                <label>Login</label>
+                <input type="text" 
+                      class="form-control" 
+                      placeholder="Login"
+                      [(ngModel)]="model.login"
+                      name="login"
+                      #login="ngModel"
+                      [ngClass]="{ 'is-invalid' : f.submitted && login.invalid }"
+                      required maxlength="8">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 pr-1">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Adresse email</label>
+                <input type="email" 
+                      class="form-control"
+                      [(ngModel)]="model.email"
+                      name="email"
+                      placeholder="Adresse email"
+                      type="email"
+                      #email="ngModel"
+                      [ngClass]="{ 'is-invalid' : f.submitted && email.invalid }"
+                      required email>
+              </div>
+            </div>
+            <div class="col-md-6 pl-1">
+              <div class="form-group">
+                <label>Téléphone</label>
+                <input type="number" 
+                      class="form-control" 
+                      placeholder="Téléphone"
+                      [(ngModel)]="model.phone"
+                      name="phone"
+                      type="tel"
+                      #phone="ngModel"
+                      [ngClass]="{ 'is-invalid' : f.submitted && phone.invalid }"
+                      required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="update ml-auto mr-auto">
+              <button type="submit" class="btn btn-primary btn-round">Inscrire</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
